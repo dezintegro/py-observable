@@ -18,7 +18,10 @@ class ObservableMixin:
 
     def raise_event(self, event_type: EventType, payload: dict = None):
         event = Event(event_type, self, payload)
-        observers = (*self._event_handlers[EventType.any], *self._event_handlers[event_type])
+        observers = (
+            *self._event_handlers[EventType.any],
+            *self._event_handlers[event_type],
+        )
         for observer in observers:
             observer(event)
 
@@ -44,13 +47,9 @@ class ObservableList(ObservableMixin, UserList):
     def clear(self):
         prev_state = list(self.data)
         super().clear()
-        self.raise_event(
-            EventType.update, {"prev_state": prev_state}
-        )
+        self.raise_event(EventType.update, {"prev_state": prev_state})
 
     def extend(self, other):
         prev_state = list(self.data)
         super().extend(other)
-        self.raise_event(
-            EventType.update, {"prev_state": prev_state}
-        )
+        self.raise_event(EventType.update, {"prev_state": prev_state})

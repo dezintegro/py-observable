@@ -1,0 +1,14 @@
+language: python
+python:
+    - "3.6"
+    - "3.7-dev"
+
+install:
+    - pip install codecov flake8
+
+script:
+    - flake8
+    - coverage run --source=observable setup.py test
+
+after_success:
+  - codecov

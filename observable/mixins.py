@@ -1,12 +1,12 @@
-from collections.__init__ import defaultdict
-from typing import Any
+from collections import defaultdict
+from typing import Union
 
 from .event import EventType, Event
 
 
 class ObservableMixin:
 
-    data: Any
+    data: Union[list, dict]
 
     def __init__(self, init_arg=None, **kwds):
         self._event_handlers = defaultdict(list)

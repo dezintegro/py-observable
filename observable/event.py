@@ -1,4 +1,5 @@
 from enum import Enum
+from collections import namedtuple
 
 
 class EventType(Enum):
@@ -8,20 +9,4 @@ class EventType(Enum):
     update = 2
 
 
-class Event:
-    def __init__(self, action: EventType, source: object, payload: dict = None):
-        self._action = action
-        self._payload = payload
-        self._source = source
-
-    @property
-    def action(self):
-        return self._action
-
-    @property
-    def source(self):
-        return self._source
-
-    @property
-    def payload(self):
-        return self._payload
+Event = namedtuple('Event', ['action', 'source', 'payload'])

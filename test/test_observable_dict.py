@@ -3,14 +3,7 @@ from unittest import mock
 
 from observable.event import Event, EventType
 from observable.collections import ObservableDict
-
-
-def assert_event_handler(expected_event, mocked_handler):
-    assert mocked_handler.call_count == 1
-    actual_event = mocked_handler.call_args[0][0]
-    assert actual_event.source == expected_event.source
-    assert actual_event.action == expected_event.action
-    assert actual_event.payload == expected_event.payload
+from test.utils import assert_event_handler
 
 
 class TestObservableDict(unittest.TestCase):

@@ -5,8 +5,11 @@ python:
     - "3.7-dev"
 
 install:
-  - pip install flake8
+    - pip install --user codecov flake8
 
 script:
     - flake8
-    - python -m unittest -v tests.py
+    - coverage run --source=observable setup.py test
+
+after_success:
+  - codecov
